@@ -13,23 +13,23 @@ import time
 import csv
 
 default_dag_args = {
-    "owner": "Vu",
+    "owner": "User01",
     ## Trigger for next day
     "depends_on_past": False,
     ## Setting start date as yesterday starts the DAG immediately when it is # detected in the Cloud Storage bucket.
     "start_date": datetime(2023, 2, 16, 0, 30),
     # To email on failure or retry set 'email' arg to your email and enable # emailing here.
-    "email": "vu.tran@hellohealthgroup.com",
+    "email": "abc@gmail.com",
     "email_on_failure": True,
     "email_on_retry": False,
     # If a task fails, retry it once after waiting at least 15 minutes
     "retries": 2,
     "retry_delay": timedelta(minutes=15),
-    "project_id": "hhg-ods",
+    "project_id": "project",
 }
 
 with DAG(
-    dag_id="hhg_fb_ads_insights_api",
+    dag_id="fb_ads_data",
     description="DAG to get daily FB ads insights of active ad accounts",
     schedule_interval="45 0 * * *",
     default_args=default_dag_args,
@@ -83,16 +83,16 @@ with DAG(
         ]
         # Get credentials from json file
         credentials = service_account.Credentials.from_service_account_file(
-            "/home/airflow/gcs/dags/hhg-cdm-bcdeee60c0e1.json", scopes=scopes
+            "/home/airflow/gcs/dags/project-bcdeee60c0e1.json", scopes=scopes
         )
-        project = "hhg-cdm"
+        project = "project"
 
         # Initiate a new client for BQ
         client = bigquery.Client(credentials=credentials, project=project)
 
         query = """
             SELECT Ad_Account_ID
-            FROM `hhg-ods.hhg_facebookads.hhg_facebookads_accounts`
+            FROM `project.project_facebookads.project_facebookads_accounts`
             WHERE Active = true
         """
 
@@ -387,7 +387,7 @@ with DAG(
 
                                 # Send to BQ
                                 # Upload csv file to BQ
-                                table_id = "hhg-ods.hhg_facebookads.hhg_facebookads_insights_di"
+                                table_id = "project.project_facebookads.project_facebookads_insights_di"
 
                                 job_config = bigquery.LoadJobConfig(
                                     schema=[
