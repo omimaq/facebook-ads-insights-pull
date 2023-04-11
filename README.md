@@ -23,10 +23,18 @@ Before running the script, you need to have the following:
 pip install requests
 ```
 
-# Usage
+## Usage
 1. Clone the repository or download the main.py file from the GitHub repository at https://raw.githubusercontent.com/omimaq/facebook-ads-insights-pull/main/main.py.
 2. Open the main.py file and modify the ACCESS_TOKEN, AD_ACCOUNT_ID, TIME_RANGE, and FIELDS variables according to your requirements. You can also customize other parameters as needed.
 3. Save the main.py file with your changes.
 4. Open a terminal and navigate to the directory where you saved the main.py file.
 5. Run the script using the following command:
+```bash
+python main.py
+```
+6. The script will fetch the insights data from the Facebook Ads API and save it to a CSV file with the name ads_insights.csv in the same directory.
+7. You can open the ads_insights.csv file using any spreadsheet software such as Microsoft Excel or Google Sheets for further analysis.
+
+## Contributing
+Contributions to this project are welcome! If you find any issues or have suggestions for improvements, please feel free to submit a pull request or open an issue in the GitHub repository at https://github.com/omimaq/facebook-ads-insights-pull.
 
